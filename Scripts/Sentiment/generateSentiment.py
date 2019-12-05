@@ -3,7 +3,7 @@ import numpy as np
 import nltk.sentiment.vader
 import re
 
-df = pd.read_csv("All_tweets_replies_excluded.csv")
+df = pd.read_csv("Sentiment_Tweets.csv")
 
 # Separate Date and Time
 df["created_at"] = pd.to_datetime(df.created_at)

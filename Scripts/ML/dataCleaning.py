@@ -6,20 +6,31 @@ import nltk
 import pandas as pd
 import spacy
 
-df = dd.read_parquet("tweets.parquet", columns=["timestamp", "text"], engine="pyarrow",)
+df = dd.read_csv(
+    "data-streaming-tweets.csv",
+    names=["user", "followers", "time", "text"],
+    engine="python",
+    encoding="utf-8",
+    error_bad_lines=False,
+    dtype={"followers": "object"},
+)
+
+tknzr = nltk.tokenize.TweetTokenizer(preserve_case=False, strip_handles=True)
 
 
 def tokenize(text):
     """
     Tokenize text
     """
-    tokens = nltk.word_tokenize(text)
+    tokens = tknzr.tokenize(str(text))
 
-    return list(filter(lambda word: word.isalnum(), tokens))
+    return list(filter(lambda word: word.isalpha(), tokens))
 
 
 stop_words = nltk.corpus.stopwords.words("english")
-stop_words.extend(["bitcoin", "btc", "http", "https"])
+stop_words.extend(
+    ["bitcoin", "btc", "http", "https", "rt",]
+)
 
 
 def remove_stopwords(words):
@@ -48,12 +59,7 @@ def clean_text(df):
     """
     Take in a Dataframe, and process it
     """
-    df["cleaned"] = (
-        df.text.map(lambda x: str(x).lower())
-        .map(tokenize)
-        .map(remove_stopwords)
-        .map(lemmatize)
-    )
+    df["cleaned"] = df.text.map(tokenize).map(remove_stopwords).map(lemmatize)
     return df
 
 
