@@ -8,6 +8,8 @@ The Python scripts are located in [Scripts/Sentiment/](https://github.com/noelch
 1. [downloadSentiment.py](https://github.com/noelchia/Bitcoin-NLP/blob/master/Scripts/Sentiment/downloadSentiment.py) to download the data from Twitter
     * An example dataset can be found in [Data/Sentiment_Tweets.csv](https://github.com/noelchia/Bitcoin-NLP/blob/master/Data/Sentiment_Tweets.csv)
 2. [generateSentiment.py](https://github.com/noelchia/Bitcoin-NLP/blob/master/Scripts/Sentiment/generateSentiment.py) to generate the Sentiment Scores from the Tweets
+3. We merged the price data and sentiment scores with SQL code [mergeSentimentBTC_sql.rtf](https://github.com/chenrhcq/Bitcoin-NLP/blob/master/Scripts/Sentiment/mergeSentimentBTC_sql.rtf) and excel.
+4. The backtest script is [backtestSentiment.py](https://github.com/chenrhcq/Bitcoin-NLP/blob/master/Scripts/Sentiment/backtestSentiment.py)
 
 ## Hourly Trading based on Machine Learning
 Our machine learning algorithm produced far better results, but they are trained and tested on a dataset that is only 2 weeks long.
